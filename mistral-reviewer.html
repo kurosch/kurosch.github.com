@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mistral PR Reviewer — kurosch</title>
+<meta name="description" content="An automated pull-request review agent powered by Mistral AI, running as a GitHub App identity.">
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #12100e;
+    color: #f4f1ec;
+    line-height: 1.65;
+    min-height: 100vh;
+  }
+  main { max-width: 760px; margin: 0 auto; padding: 64px 24px 96px; }
+  .badge {
+    display: inline-block;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #ff8a4c;
+    border: 1px solid rgba(255, 138, 76, 0.4);
+    border-radius: 999px;
+    padding: 4px 14px;
+    margin-bottom: 20px;
+  }
+  h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); line-height: 1.2; margin-bottom: 12px; }
+  h1 span { color: #ffbe73; }
+  .tagline { font-size: 1.1rem; color: #b8b2a7; margin-bottom: 40px; }
+  h2 { font-size: 1.25rem; margin: 40px 0 12px; color: #ffbe73; }
+  p, li { color: #d8d3c9; }
+  ul { padding-left: 22px; margin-top: 8px; }
+  li { margin-bottom: 6px; }
+  .flow {
+    background: #1a1713;
+    border: 1px solid #2e2921;
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-top: 16px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.9rem;
+    color: #cfc9bd;
+    overflow-x: auto;
+  }
+  .flow b { color: #ff8a4c; font-weight: 600; }
+  .arrow { color: #6f685b; }
+  code { background: #241f19; border-radius: 5px; padding: 2px 6px; font-size: 0.88em; color: #ffbe73; }
+  footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid #2e2921; font-size: 0.85rem; color: #8a8478; }
+  a { color: #ff8a4c; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<main>
+  <span class="badge">Automation</span>
+  <h1>Mistral PR Reviewer<span>.</span></h1>
+  <p class="tagline">An automated pull-request review agent powered by Mistral AI.</p>
+
+  <h2>What is this?</h2>
+  <p>
+    <strong>Mistral Reviewer</strong> is a GitHub App that reviews open pull requests on
+    Kurosch&rsquo;s repositories. On every PR (opened or updated), a GitHub Actions workflow
+    sends the diff and PR description to the Mistral API, which returns concise, actionable
+    review feedback posted by the bot identity <code>mistral-reviewer[bot]</code>.
+  </p>
+
+  <h2>How it works</h2>
+  <div class="flow">
+    <b>PR opened</b> <span class="arrow">&rarr;</span> GitHub Actions workflow<br>
+    &rarr; exchange App key for installation token<br>
+    &rarr; send diff + context to <b>Mistral API</b><br>
+    &rarr; post review as <b>mistral-reviewer[bot]</b> <span class="arrow">&rarr;</span> human decides
+  </div>
+
+  <h2>Principles</h2>
+  <ul>
+    <li><strong>Non-blocking:</strong> the bot posts comments only. It never approves, requests changes, or merges.</li>
+    <li><strong>Focused:</strong> reviews flag real issues — bugs, security, performance, maintainability — not style noise.</li>
+    <li><strong>Bounded:</strong> oversized diffs are skipped; stale runs are cancelled on force-push.</li>
+    <li><strong>Scoped:</strong> the GitHub App has read-only content access and pull-request write permission, nothing more.</li>
+  </ul>
+
+  <h2>Contact</h2>
+  <p>
+    This page is the public home of the <code>mistral-reviewer</code> GitHub App used for
+    automated reviews across <a href="https://github.com/kurosch">kurosch</a>&rsquo;s repositories.
+    Questions or feedback? Open an issue on the relevant repository.
+  </p>
+
+  <footer>
+    Powered by <a href="https://mistral.ai">Mistral AI</a> &middot; Built as a GitHub App on GitHub Actions &middot; &copy; 2026 Kurosch Petzold
+  </footer>
+</main>
+</body>
+</html>
